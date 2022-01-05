@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 public class move : MonoBehaviour
 {
     Rigidbody rigid;
     public int itemcount;
+    public BallManger manger; 
     bool isjump;
     void Awake()
     {
         isjump = false;
-        rigid = GetComponent<Rigidbody>();        
+        rigid = GetComponent<Rigidbody>();
+
     }
 
     void Update()
@@ -23,6 +27,7 @@ public class move : MonoBehaviour
     }
 
 
+
     void FixedUpdate()
     {
         Vector3 vec = new Vector3(Input.GetAxisRaw("Horizontal"),
@@ -33,18 +38,23 @@ public class move : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Quad" || collision.gameObject.name == "floor")
-        {
+        if(collision.gameObject.CompareTag("forest")) //점프기능 활성화
             isjump = false;
-        }   
-        if(collision.gameObject.name== "floor1")
-            isjump = false; 
     }
-     void OnTriggerEnter(Collider other)
+    
+    void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "final")
-        {
-            SceneManager.LoadScene("stage1");
+        if (other.tag == "item") {    
+            itemcount++;
+            other.gameObject.SetActive(false); 
+            manger.GetItem(itemcount);
+            
         }
+
+        else if (other.tag == "final")
+        {
+            SceneManager.LoadScene("world");
+        }
+      
     }
 }

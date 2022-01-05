@@ -7,6 +7,8 @@ TagManager:
   - player
   - final
   - reset
+  - forest
+  - item
   layers:
   - Default
   - TransparentFX

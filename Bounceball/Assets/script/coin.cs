@@ -13,11 +13,7 @@ public class coin : MonoBehaviour
 
      void OnTriggerEnter(Collider other)
     {
-        if (other.name == "player")
-        {
-            move ball = other.GetComponent<move>();
-            ball.itemcount++;
-            gameObject.SetActive(false); ;
-        }
+       
+
     }
 }
