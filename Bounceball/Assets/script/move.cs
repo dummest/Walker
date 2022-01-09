@@ -10,6 +10,8 @@ public class move : MonoBehaviour
     public int itemcount;
     public BallManger manger; 
     bool isjump;
+
+    public Transform camPoint;
     void Awake()
     {
         isjump = false;
@@ -19,6 +21,7 @@ public class move : MonoBehaviour
 
     void Update()
     {
+        
         if (Input.GetButtonDown("Jump")&& !isjump) {
             isjump = true;
             rigid.AddForce(new Vector3(0, 40, 0), ForceMode.Impulse);
@@ -30,10 +33,15 @@ public class move : MonoBehaviour
 
     void FixedUpdate()
     {
+        
+
         Vector3 vec = new Vector3(Input.GetAxisRaw("Horizontal"),
             0,
             Input.GetAxisRaw("Vertical"));
-        rigid.AddForce(vec, ForceMode.Impulse);
+
+        Vector3 heading = camPoint.localRotation * vec;
+        rigid.AddForce(heading , ForceMode.Impulse);
+        
     }
 
     void OnCollisionEnter(Collision collision)
