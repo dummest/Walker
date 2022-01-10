@@ -12,6 +12,7 @@ public class CamPointRotate : MonoBehaviour
     void Awake()
     {
         playertransform = GameObject.Find("player").transform;
+        camPoint.position = playertransform.position;
         Offset = transform.position - playertransform.position;
     }
 
