@@ -10,8 +10,7 @@ public class move : MonoBehaviour
     public int itemcount;
     public BallManger manger; 
     bool isjump;
-
-    public Transform camPoint;
+    public float speed;
     void Awake()
     {
         isjump = false;
@@ -21,10 +20,9 @@ public class move : MonoBehaviour
 
     void Update()
     {
-        
         if (Input.GetButtonDown("Jump")&& !isjump) {
             isjump = true;
-            rigid.AddForce(new Vector3(0, 40, 0), ForceMode.Impulse);
+            rigid.AddForce(new Vector3(0,speed, 0), ForceMode.Impulse);
         }
 
     }
@@ -33,15 +31,10 @@ public class move : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-
-        Vector3 vec = new Vector3(Input.GetAxisRaw("Horizontal"),
-            0,
-            Input.GetAxisRaw("Vertical"));
-
-        Vector3 heading = camPoint.localRotation * vec;
-        rigid.AddForce(heading , ForceMode.Impulse);
-        
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        Vector3 vec = new Vector3(h,0,v);
+        rigid.AddForce(vec, ForceMode.Impulse);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -61,7 +54,7 @@ public class move : MonoBehaviour
 
         else if (other.tag == "final")
         {
-            SceneManager.LoadScene("world");
+            SceneManager.LoadScene("MapUi");
         }
       
     }

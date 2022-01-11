@@ -13,7 +13,7 @@ public class BallManger : MonoBehaviour
 
     private void Awake()
     {
-        StageCount.text = "/" + itemcount;
+        StageCount.text = "/ " + itemcount;
     }
 
     public void GetItem(int count) {
