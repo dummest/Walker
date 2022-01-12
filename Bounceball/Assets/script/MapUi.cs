@@ -53,10 +53,8 @@ public class MapUi : MonoBehaviour
         SceneManager.LoadScene("world");
     }
 
-    public void OnClickBack()
-    {
-        Debug.Log("main");
-        SceneManager.LoadScene("TitleScreen");
+    public void OnClickBack() {
 
+        SceneManager.LoadScene("TitleScreen");
     }
 }

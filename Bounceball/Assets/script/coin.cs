@@ -5,7 +5,12 @@ using UnityEngine;
 public class coin : MonoBehaviour
 {
     public float roatespeed;
+    
 
+    private void Awake()
+    {
+        
+    }
     void Update()
     {
         transform.Rotate(Vector3.up *roatespeed * Time.deltaTime, Space.World); //È¸Àü
@@ -13,7 +18,7 @@ public class coin : MonoBehaviour
 
      void OnTriggerEnter(Collider other)
     {
-       
+        
 
     }
 }

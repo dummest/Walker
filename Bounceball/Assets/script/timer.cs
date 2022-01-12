@@ -11,7 +11,7 @@ public class timer : MonoBehaviour
  
     void Update()
     {
-        
+
             Timer += Time.deltaTime;
 
         Timer_text.text = "½Ã°£ : " + Mathf.Round(Timer);

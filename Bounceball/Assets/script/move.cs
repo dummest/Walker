@@ -10,19 +10,23 @@ public class move : MonoBehaviour
     public int itemcount;
     public BallManger manger; 
     bool isjump;
-    public float speed;
+    AudioSource audio;
+
+    public Transform camPoint;
     void Awake()
     {
         isjump = false;
         rigid = GetComponent<Rigidbody>();
+        audio = GetComponent<AudioSource>();
 
     }
 
     void Update()
     {
+        
         if (Input.GetButtonDown("Jump")&& !isjump) {
             isjump = true;
-            rigid.AddForce(new Vector3(0,speed, 0), ForceMode.Impulse);
+            rigid.AddForce(new Vector3(0, 40, 0), ForceMode.Impulse);
         }
 
     }
@@ -31,10 +35,15 @@ public class move : MonoBehaviour
 
     void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Vector3 vec = new Vector3(h,0,v);
-        rigid.AddForce(vec, ForceMode.Impulse);
+        
+
+        Vector3 vec = new Vector3(Input.GetAxisRaw("Horizontal"),
+            0,
+            Input.GetAxisRaw("Vertical"));
+
+        Vector3 heading = camPoint.localRotation * vec;
+        rigid.AddForce(heading , ForceMode.Impulse);
+        
     }
 
     void OnCollisionEnter(Collision collision)
@@ -47,6 +56,7 @@ public class move : MonoBehaviour
     {
         if (other.tag == "item") {    
             itemcount++;
+            audio.Play();
             other.gameObject.SetActive(false); 
             manger.GetItem(itemcount);
             
@@ -54,7 +64,8 @@ public class move : MonoBehaviour
 
         else if (other.tag == "final")
         {
-            SceneManager.LoadScene("MapUi");
+            
+            SceneManager.LoadScene("MapUI");
         }
       
     }

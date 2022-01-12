@@ -7,7 +7,7 @@ public class TitleButton : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("MapUi");
+        SceneManager.LoadScene("MapUI");
     }
 
     public void QuitGame()
