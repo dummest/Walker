@@ -18,7 +18,8 @@ public class CamPointRotate : MonoBehaviour
 
     void Update()
     {
-        LookAround();
+        if (Time.timeScale > 0)
+            LookAround();
     }
     void LateUpdate()
     {
